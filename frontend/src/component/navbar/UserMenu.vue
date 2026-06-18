@@ -5,8 +5,12 @@ import Spaceindex from "@/view/user/space/Spaceindex.vue";
 import SpaceIcon from "@/component/navbar/icons/SpaceIcon.vue";
 import ProfileIcon from "@/component/navbar/icons/ProfileIcon.vue";
 import LogoutIcon from "@/component/navbar/icons/LogoutIcon.vue";
+// @ts-ignore
+import api from '@/js/http/api'
+import {useRouter} from "vue-router";
 
 const user = useUserStore();
+const router = useRouter();
 
 // 收起菜单
 function closeMenu() {
@@ -14,6 +18,19 @@ function closeMenu() {
   if (element && element instanceof HTMLElement) element.blur()
 }
 
+async function handleLogout(){
+  try {
+    const res = await api.post('api/user/account/logout/')
+    if (res.data.result==='退出登录成功~') {
+      user.logout()
+      await router.push({
+        name:"Homepageindex"
+      })
+    }
+  } catch (err){
+    console.log(err)
+  }
+}
 </script>
 
 <template>
@@ -47,7 +64,7 @@ function closeMenu() {
         </RouterLink>
       </li>
       <li>
-        <a @click="closeMenu" class="text-sm font-bold py-3">
+        <a @click="handleLogout" class="text-sm font-bold py-3">
           <LogoutIcon/>
           退出登录
         </a>
