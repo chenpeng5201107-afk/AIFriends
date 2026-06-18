@@ -1,16 +1,16 @@
 import {defineStore} from 'pinia'
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
 
 export const useUserStore = defineStore('user', ()=>{
+    const id = ref(0)
     const username = ref('')
-    const id = ref(1)
     const photo = ref('')
     const profile = ref('')
     const accessToken = ref('')
 
-    function isLogin() {
+    const isLogin = computed(() => {
         return !!accessToken.value
-    }
+    })
 
     function setAccessToken(token) {
         accessToken.value = token
