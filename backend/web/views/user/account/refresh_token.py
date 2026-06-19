@@ -18,7 +18,7 @@ class RefreshTokenView(APIView):
                 refresh.set_jti()
                 response = Response({
                     'result':'登录成功~',
-                    'access':str(refresh_token.access_token),
+                    'access':str(refresh.access_token),
                 })
                 response.set_cookie(
                     key='refresh_token',
@@ -31,7 +31,7 @@ class RefreshTokenView(APIView):
                 return response
             return Response({
                 'result':'登录成功~',
-                'access':str(refresh_token.access_token),
+                'access':str(refresh.access_token),
             })
         except:
             return Response({'result':'refresh_tokrn过期了~'},status=401)
