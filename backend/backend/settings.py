@@ -55,21 +55,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -119,12 +104,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 # 设置static和media静态文件路径
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # STATIC_ROOT = BASE_DIR / 'static'  # 生产阶段使用
 
-STATICFILES_DIRS = [  # 开发阶段使用，生产阶段需要注释掉
-    BASE_DIR / 'static',
+STATICFILES_DIRS = [
+    BASE_DIR / 'static' / 'frontend',
 ]
 
 MEDIA_URL = 'http://127.0.0.1:8000/media/'
@@ -156,4 +141,20 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [  # ✅ 添加这个
+            BASE_DIR / 'static' / 'frontend',  # index.html 所在目录
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
