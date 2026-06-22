@@ -10,6 +10,7 @@ import Spaceindex from "@/view/user/space/Spaceindex.vue";
 import Profileindex from "@/view/user/profile/Profileindex.vue";
 // @ts-ignore
 import { useUserStore } from '@/stores/user'
+import UpdateCharacter from "@/view/create/character/UpdateCharacter.vue";
 
 
 const router = createRouter({
@@ -43,6 +44,14 @@ const router = createRouter({
       path:'/create',
       component:Createindex,
       name:'Createindex',
+       meta: {
+        needlogin: true,
+      },
+    },
+    {
+      path:'/create/character/update/:character_id/',
+      component:UpdateCharacter,
+      name:'Updatecharacter',
        meta: {
         needlogin: true,
       },
