@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import Createindex from "@/view/create/character/CreateCharacter.vue"
 </script>
 
 <template>
-创作
+ <Createindex/>
 </template>
 
 <style scoped>
